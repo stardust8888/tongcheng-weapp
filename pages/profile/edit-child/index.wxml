@@ -1,0 +1,285 @@
+<page-meta page-style="{{pickerVisible || datePickerVisible || regionPickerVisible ? 'overflow: hidden;' : ''}}"></page-meta>
+<view class="page-edit {{themeClass}}">
+  <!-- 照片区 -->
+  <view class="section">
+    <view class="section-header">
+      <view class="section-dot"></view>
+      <text class="section-title">形象照片</text>
+    </view>
+    <view class="photo-area">
+      <view class="photo-grid">
+        <view class="photo-box" wx:for="{{photoList}}" wx:key="index">
+          <view class="photo-ratio"></view>
+          <image class="photo-img" src="{{item.display}}" mode="aspectFill"></image>
+          <view class="photo-cover-tag" wx:if="{{index === 0}}">封面</view>
+          <view class="photo-uploading" wx:if="{{item.uploading}}">
+            <text class="uploading-text">上传中...</text>
+          </view>
+          <view class="photo-remove" catchtap="removePhoto" data-index="{{index}}">
+            <text class="remove-icon">×</text>
+          </view>
+        </view>
+        <view class="photo-box photo-add" wx:if="{{photoList.length < 6}}" bindtap="choosePhoto">
+          <view class="photo-ratio"></view>
+          <text class="add-icon">+</text>
+          <text class="add-text">添加照片</text>
+        </view>
+      </view>
+      <text class="photo-tip">最多上传6张照片，第一张将作为封面展示</text>
+    </view>
+  </view>
+
+  <!-- 基本信息 -->
+  <view class="section">
+    <view class="section-header">
+      <view class="section-dot"></view>
+      <text class="section-title">基本信息</text>
+    </view>
+    <view class="form-card">
+      <view class="form-row" data-field="relation" bindtap="openPicker">
+        <text class="form-label">与您关系</text>
+        <view class="form-value-wrap">
+          <text class="form-value {{relation ? '' : 'placeholder'}}">{{relation ? relationOptions[relation] : '请选择'}}</text>
+          <text class="form-arrow">›</text>
+        </view>
+      </view>
+
+      <view class="form-row" bindtap="openDatePicker">
+        <text class="form-label">出生日期</text>
+        <view class="form-value-wrap">
+          <text class="form-value {{birth ? '' : 'placeholder'}}">{{birth || '请选择'}}</text>
+          <text class="form-arrow">›</text>
+        </view>
+      </view>
+
+      <view class="form-row" data-field="height" bindtap="openPicker">
+        <text class="form-label">身高</text>
+        <view class="form-value-wrap">
+          <text class="form-value {{height ? '' : 'placeholder'}}">{{height ? heightOptions[height] : '请选择'}}</text>
+          <text class="form-arrow">›</text>
+        </view>
+      </view>
+
+      <view class="form-row" data-field="weight" bindtap="openPicker">
+        <text class="form-label">体重</text>
+        <view class="form-value-wrap">
+          <text class="form-value {{weight ? '' : 'placeholder'}}">{{weight ? weightOptions[weight] : '请选择'}}</text>
+          <text class="form-arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 学历工作 -->
+  <view class="section">
+    <view class="section-header">
+      <view class="section-dot"></view>
+      <text class="section-title">学历工作</text>
+    </view>
+    <view class="form-card">
+      <view class="form-row" data-field="education" bindtap="openPicker">
+        <text class="form-label">学历</text>
+        <view class="form-value-wrap">
+          <text class="form-value {{education ? '' : 'placeholder'}}">{{education ? educationOptions[education] : '请选择'}}</text>
+          <text class="form-arrow">›</text>
+        </view>
+      </view>
+
+      <view class="form-row" data-field="company" bindtap="openPicker">
+        <text class="form-label">公司性质</text>
+        <view class="form-value-wrap">
+          <text class="form-value {{company ? '' : 'placeholder'}}">{{company ? companyOptions[company] : '请选择'}}</text>
+          <text class="form-arrow">›</text>
+        </view>
+      </view>
+
+      <view class="form-row" data-field="work" bindtap="openPicker">
+        <text class="form-label">职业</text>
+        <view class="form-value-wrap">
+          <text class="form-value {{work ? '' : 'placeholder'}}">{{work ? workOptions[work] : '请选择'}}</text>
+          <text class="form-arrow">›</text>
+        </view>
+      </view>
+
+      <view class="form-row" data-field="yearIncome" bindtap="openPicker">
+        <text class="form-label">年薪</text>
+        <view class="form-value-wrap">
+          <text class="form-value {{yearIncome ? '' : 'placeholder'}}">{{yearIncome ? incomeOptions[yearIncome] : '请选择'}}</text>
+          <text class="form-arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 婚姻情况 -->
+  <view class="section">
+    <view class="section-header">
+      <view class="section-dot"></view>
+      <text class="section-title">婚姻情况</text>
+    </view>
+    <view class="form-card">
+      <view class="form-row" data-field="maritalStatus" bindtap="openPicker">
+        <text class="form-label">婚姻状况</text>
+        <view class="form-value-wrap">
+          <text class="form-value {{maritalStatus ? '' : 'placeholder'}}">{{maritalStatus ? maritalOptions[maritalStatus] : '请选择'}}</text>
+          <text class="form-arrow">›</text>
+        </view>
+      </view>
+
+      <view class="form-row" data-field="maritalPlan" bindtap="openPicker">
+        <text class="form-label">结婚计划</text>
+        <view class="form-value-wrap">
+          <text class="form-value {{maritalPlan ? '' : 'placeholder'}}">{{maritalPlan ? maritalPlanOptions[maritalPlan] : '请选择'}}</text>
+          <text class="form-arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 家庭条件 -->
+  <view class="section">
+    <view class="section-header">
+      <view class="section-dot"></view>
+      <text class="section-title">家庭条件</text>
+    </view>
+    <view class="form-card">
+      <view class="form-row" data-field="isOnlyChild" bindtap="openPicker">
+        <text class="form-label">独生子女</text>
+        <view class="form-value-wrap">
+          <text class="form-value {{isOnlyChild ? '' : 'placeholder'}}">{{isOnlyChild ? onlyChildOptions[isOnlyChild] : '请选择'}}</text>
+          <text class="form-arrow">›</text>
+        </view>
+      </view>
+
+      <view class="form-row" data-field="house" bindtap="openPicker">
+        <text class="form-label">房产</text>
+        <view class="form-value-wrap">
+          <text class="form-value {{house ? '' : 'placeholder'}}">{{house ? houseOptions[house] : '请选择'}}</text>
+          <text class="form-arrow">›</text>
+        </view>
+      </view>
+
+      <view class="form-row" data-field="car" bindtap="openPicker">
+        <text class="form-label">车辆</text>
+        <view class="form-value-wrap">
+          <text class="form-value {{car ? '' : 'placeholder'}}">{{car ? carOptions[car] : '请选择'}}</text>
+          <text class="form-arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 所在地区 -->
+  <view class="section">
+    <view class="section-header">
+      <view class="section-dot"></view>
+      <text class="section-title">所在地区</text>
+    </view>
+    <view class="form-card">
+      <view class="form-row" bindtap="openRegionPicker">
+        <text class="form-label">居住地</text>
+        <view class="form-value-wrap">
+          <text class="form-value {{regionText ? '' : 'placeholder'}}">{{regionText || '请选择省市区'}}</text>
+          <text class="form-arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 个人介绍 -->
+  <view class="section">
+    <view class="section-header">
+      <view class="section-dot"></view>
+      <text class="section-title">个人介绍</text>
+    </view>
+    <view class="form-card">
+      <view class="form-tag-wrap">
+        <view class="tag-header">
+          <text class="textarea-label">兴趣爱好</text>
+          <text class="tag-count">{{interest.length}}/5</text>
+        </view>
+        <view class="tag-grid">
+          <view class="tag-item {{item.selected ? 'selected' : ''}}" wx:for="{{tagList}}" wx:key="name" data-tag="{{item.name}}" bindtap="toggleInterest">{{item.name}}</view>
+        </view>
+        <text class="tag-tip">最多选择5项</text>
+      </view>
+      <view class="form-textarea-wrap">
+        <text class="textarea-label">自我描述</text>
+        <textarea class="form-textarea" placeholder="简单介绍一下自己和心中的Ta..." value="{{description}}" data-field="description" bindinput="onInput" maxlength="500" />
+      </view>
+    </view>
+  </view>
+
+
+
+  <!-- 保存按钮 -->
+  <view class="save-area">
+    <button class="save-btn {{saving ? 'loading' : ''}}" bindtap="onSave" disabled="{{saving}}">
+      {{saving ? '保存中...' : '保存资料'}}
+    </button>
+  </view>
+
+  <!-- 地区选择器 -->
+  <view class="picker-mask {{regionPickerVisible ? 'show' : ''}}" bindtap="closeRegionPicker" catchtouchmove="noop"></view>
+  <view class="date-picker-sheet {{regionPickerVisible ? 'show' : ''}}">
+    <view class="date-picker-header">
+      <view class="date-picker-cancel" bindtap="closeRegionPicker">取消</view>
+      <text class="date-picker-title">居住地</text>
+      <view class="date-picker-confirm" bindtap="confirmRegionPicker">确定</view>
+    </view>
+    <view class="date-picker-body">
+      <picker-view class="date-picker-view" indicator-class="date-picker-indicator" value="{{regionPickerValue}}" bindchange="onRegionPickerChange">
+        <picker-view-column>
+          <view class="date-picker-item region-picker-item" wx:for="{{regionProvinces}}" wx:key="*this">{{item}}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view class="date-picker-item region-picker-item" wx:for="{{regionCities}}" wx:key="*this">{{item}}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view class="date-picker-item region-picker-item" wx:for="{{regionDistricts}}" wx:key="*this">{{item}}</view>
+        </picker-view-column>
+      </picker-view>
+    </view>
+  </view>
+
+  <!-- 日期选择器 -->
+  <view class="picker-mask {{datePickerVisible ? 'show' : ''}}" bindtap="closeDatePicker" catchtouchmove="noop"></view>
+  <view class="date-picker-sheet {{datePickerVisible ? 'show' : ''}}">
+    <view class="date-picker-header">
+      <view class="date-picker-cancel" bindtap="closeDatePicker">取消</view>
+      <text class="date-picker-title">出生日期</text>
+      <view class="date-picker-confirm" bindtap="confirmDatePicker">确定</view>
+    </view>
+    <view class="date-picker-body">
+      <picker-view class="date-picker-view" indicator-class="date-picker-indicator" value="{{datePickerValue}}" bindchange="onDatePickerChange">
+        <picker-view-column>
+          <view class="date-picker-item" wx:for="{{years}}" wx:key="*this">{{item}}年</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view class="date-picker-item" wx:for="{{months}}" wx:key="*this">{{item}}月</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view class="date-picker-item" wx:for="{{days}}" wx:key="*this">{{item}}日</view>
+        </picker-view-column>
+      </picker-view>
+    </view>
+  </view>
+
+  <!-- 自定义选择器 -->
+  <view class="picker-mask {{pickerVisible ? 'show' : ''}}" bindtap="closePicker" catchtouchmove="noop"></view>
+  <view class="date-picker-sheet {{pickerVisible ? 'show' : ''}}">
+    <view class="date-picker-header">
+      <view class="date-picker-cancel" bindtap="closePicker">取消</view>
+      <text class="date-picker-title">{{pickerTitle}}</text>
+      <view class="date-picker-confirm" bindtap="confirmPicker">确定</view>
+    </view>
+    <view class="date-picker-body">
+      <picker-view class="date-picker-view" indicator-class="date-picker-indicator" value="{{pickerViewValue}}" bindchange="onPickerViewChange">
+        <picker-view-column>
+          <view class="date-picker-item" wx:for="{{pickerDisplayOptions}}" wx:key="index">{{item}}</view>
+        </picker-view-column>
+      </picker-view>
+    </view>
+  </view>
+
+</view>

@@ -1,0 +1,131 @@
+<view class="page-profile {{themeClass}}">
+  <!-- 顶部用户栏 -->
+  <view class="user-header">
+    <view class="user-greeting">
+      <image class="user-avatar" src="{{userAvatar || '/assets/avatar/default.png'}}" mode="aspectFill" catchtap="goMyHome"></image>
+      <text class="greeting-text">{{nickname || '家长'}}</text>
+      <text class="greeting-sub">·</text>
+      <text class="greeting-sub">祝您早日为孩子觅得良缘</text>
+    </view>
+    <view class="user-stats">
+      <view class="stat-item" bindtap="goInteraction" data-type="view">
+        <text class="stat-num">{{statView}}</text>
+        <text class="stat-label">查看我</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item" bindtap="goInteraction" data-type="watch">
+        <text class="stat-num">{{statFollow}}</text>
+        <text class="stat-label">关注我</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item" bindtap="goInteraction" data-type="like">
+        <text class="stat-num">{{statLike}}</text>
+        <text class="stat-label">点赞我</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item" bindtap="goInteraction" data-type="comment">
+        <text class="stat-num">{{statComment}}</text>
+        <text class="stat-label">评论我</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 子女信息主卡片 -->
+  <view class="child-hero" wx:if="{{hasChild}}">
+    <view class="child-hero-bg"></view>
+    <view class="child-hero-content">
+      <view class="child-avatar-wrap">
+        <image class="child-avatar" src="{{childProfile.photo}}" mode="aspectFill"></image>
+        <view class="child-relation-tag" wx:if="{{childProfile.relationLabel}}">{{childProfile.relationLabel}}</view>
+        <view class="child-status" wx:if="{{childProfile.reviewStatus === 0}}">资料审核中</view>
+      </view>
+      <view class="child-main">
+        <text class="child-summary" wx:if="{{childProfile.summary}}">{{childProfile.summary}}</text>
+        <view class="child-detail-list">
+          <view class="child-detail-row">
+            <text class="detail-label">年薪</text>
+            <text class="detail-value {{childProfile.income === '未填写' ? 'placeholder' : ''}}">{{childProfile.income}}</text>
+          </view>
+          <view class="child-detail-row">
+            <text class="detail-label">单位</text>
+            <text class="detail-value {{childProfile.company === '未填写' ? 'placeholder' : ''}}">{{childProfile.company}}</text>
+          </view>
+          <view class="child-detail-row">
+            <text class="detail-label">工作</text>
+            <text class="detail-value {{childProfile.job === '未填写' ? 'placeholder' : ''}}">{{childProfile.job}}</text>
+          </view>
+          <view class="child-detail-row">
+            <text class="detail-label">地点</text>
+            <text class="detail-value {{childProfile.location === '未填写' ? 'placeholder' : ''}}">{{childProfile.location}}</text>
+          </view>
+        </view>
+        <view class="child-edit-btn" bindtap="editChildProfile">
+          <text>编辑资料</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 未添加子女信息 -->
+  <view class="child-hero" wx:else>
+    <view class="child-hero-bg"></view>
+    <view class="child-empty" bindtap="editChildProfile">
+      <view class="empty-icon-circle">
+        <text class="empty-icon-plus">+</text>
+      </view>
+      <text class="child-empty-title">添加子女信息</text>
+      <text class="child-empty-desc">完善资料，开始为孩子寻觅良缘</text>
+      <view class="child-add-btn">
+        <text>立即添加</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能入口 -->
+  <view class="menu-section">
+    <view class="menu-row" bindtap="goEditProfile">
+      <view class="menu-icon-wrap" style="background: #EDE7F6;">
+        <text class="menu-icon">👤</text>
+      </view>
+      <view class="menu-info">
+        <text class="menu-title">我的资料</text>
+        <text class="menu-desc">编辑个人信息</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+
+    <view class="menu-row" bindtap="goWatchList">
+      <view class="menu-icon-wrap" style="background: #F3EAFF;">
+        <text class="menu-icon">❤️</text>
+      </view>
+      <view class="menu-info">
+        <text class="menu-title">我的关注</text>
+        <text class="menu-desc">查看关注的家庭</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+
+    <view class="menu-row" bindtap="goMyMoments">
+      <view class="menu-icon-wrap" style="background: #E8F5E9;">
+        <text class="menu-icon">📝</text>
+      </view>
+      <view class="menu-info">
+        <text class="menu-title">我的动态</text>
+        <text class="menu-desc">管理发布的内容</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+
+    <view class="menu-row" bindtap="goSettings">
+      <view class="menu-icon-wrap" style="background: #F5F5F5;">
+        <text class="menu-icon">⚙️</text>
+      </view>
+      <view class="menu-info">
+        <text class="menu-title">设置</text>
+        <text class="menu-desc">账号与隐私设置</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+</view>

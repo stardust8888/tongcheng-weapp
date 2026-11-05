@@ -1,0 +1,318 @@
+.page-moments {
+  background: var(--tb);
+  padding: 24rpx;
+  padding-bottom: 180rpx;
+}
+
+.moment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28rpx;
+}
+
+.moment-card {
+  position: relative;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 36rpx 32rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 28rpx;
+  box-shadow: 0 4rpx 16rpx rgba(var(--ts), 0.05);
+}
+
+.moment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.moment-user {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.moment-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  border: 4rpx solid var(--tb-l);
+  flex-shrink: 0;
+}
+
+.moment-avatar-default {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--tp-ll), var(--tp));
+}
+
+.avatar-text {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #fff;
+}
+
+.moment-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.moment-name-row {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.moment-nickname {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: var(--tt);
+}
+
+.tag-verified {
+  padding: 6rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+  background: var(--tb-l);
+  color: var(--tp);
+}
+
+.moment-meta {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.moment-text {
+  font-size: 34rpx;
+  color: #1a1a1a;
+  line-height: 1.8;
+}
+
+.moment-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.moment-img {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 16rpx;
+}
+
+.moment-img.single {
+  width: 240rpx;
+  height: auto;
+}
+
+.moment-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: 4rpx;
+  border-top: 1rpx solid var(--tb);
+}
+
+.moment-actions {
+  display: flex;
+  gap: 48rpx;
+}
+
+.moment-action {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  padding: 4rpx 4rpx;
+}
+
+.action-icon {
+  font-size: 44rpx;
+  line-height: 1;
+}
+
+.action-icon.liked {
+  transform: scale(1.2);
+}
+
+.action-count {
+  font-size: 30rpx;
+  color: #666;
+}
+
+.action-count.liked {
+  color: var(--tp);
+  font-weight: 600;
+}
+
+/* 评论：气泡图标（SVG 实心，红心红 #E53935，与点赞 ❤️ 同色；两主题同色）*/
+.icon-comment {
+  width: 42rpx;
+  height: 42rpx;
+  position: relative;
+  top: 5rpx;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI0U1MzkzNSI+PHBhdGggZD0iTTMgMSBIMjEgYTIgMiAwIDAgMSAyIDIgVjE4IGEyIDIgMCAwIDEtMiAyIEg2IGwtNSAzIFYzIGEyIDIgMCAwIDEgMi0yIFoiLz48L3N2Zz4=");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+.theme-purple .icon-comment {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI0U1MzkzNSI+PHBhdGggZD0iTTMgMSBIMjEgYTIgMiAwIDAgMSAyIDIgVjE4IGEyIDIgMCAwIDEtMiAyIEg2IGwtNSAzIFYzIGEyIDIgMCAwIDEgMi0yIFoiLz48L3N2Zz4=");
+}
+
+/* 删除按钮（我的动态专用）*/
+.moment-delete-btn {
+  position: absolute;
+  top: 16rpx;
+  right: 20rpx;
+  padding: 8rpx 16rpx;
+  z-index: 2;
+}
+
+.moment-delete-text {
+  font-size: 26rpx;
+  color: #999;
+}
+
+/* 评论区 */
+.comment-section {
+  background: var(--tb-ll);
+  border-radius: 12rpx;
+  padding: 20rpx 24rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.comment-more {
+  padding-top: 8rpx;
+}
+
+.comment-more-text {
+  font-size: 30rpx;
+  color: var(--tp);
+  font-weight: 600;
+}
+
+.comment-item {
+  font-size: 32rpx;
+  line-height: 1.75;
+  color: #1a1a1a;
+}
+
+.comment-user {
+  color: #070707;
+  font-weight: 600;
+}
+
+.comment-reply {
+  color: #777;
+}
+
+.comment-replier {
+  color: #070707;
+  font-weight: 600;
+}
+
+.comment-text {
+  color: #1a1a1a;
+}
+
+/* 悬浮发布按钮 */
+.fab-post {
+  position: fixed;
+  right: 80rpx;
+  bottom: 260rpx;
+  padding: 28rpx 48rpx;
+  border-radius: 44rpx;
+  background: linear-gradient(135deg, var(--tp), var(--tp-l));
+  box-shadow: 0 8rpx 32rpx rgba(var(--ts), 0.4);
+  z-index: 99;
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+.fab-post.fab-hidden {
+  opacity: 0;
+  transform: scale(.6);
+  pointer-events: none;
+}
+
+.fab-text {
+  font-size: 32rpx;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* 评论输入栏
+   我的动态为 navigateTo 页，无自定义 tabbar，评论栏直接固定在底部，并预留安全区。 */
+.comment-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  padding: 20rpx 24rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  border-top: 1rpx solid #eee;
+  box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.06);
+  z-index: 10000;
+}
+
+.comment-input {
+  flex: 1;
+  height: 88rpx;
+  background: var(--tb);
+  border-radius: 44rpx;
+  padding: 0 32rpx;
+  font-size: 34rpx;
+}
+
+.comment-send-btn {
+  padding: 20rpx 44rpx;
+  background: linear-gradient(135deg, var(--tp), var(--tp-l));
+  color: #fff;
+  font-size: 34rpx;
+  font-weight: 600;
+  border-radius: 44rpx;
+  flex-shrink: 0;
+}
+
+/* 加载状态 */
+.list-footer {
+  text-align: center;
+  padding: 32rpx 0 16rpx;
+}
+
+.footer-text {
+  font-size: 28rpx;
+  color: #555;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 200rpx;
+  gap: 16rpx;
+}
+
+.empty-icon {
+  font-size: 88rpx;
+}
+
+.empty-text {
+  font-size: 34rpx;
+  color: #666;
+}
+
+.empty-hint {
+  font-size: 30rpx;
+  color: #555;
+}

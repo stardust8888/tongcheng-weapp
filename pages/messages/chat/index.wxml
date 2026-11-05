@@ -1,0 +1,80 @@
+<view class="page-chat {{themeClass}}">
+  <scroll-view
+    class="msg-scroll"
+    scroll-y
+    enhanced
+    show-scrollbar="{{false}}"
+    scroll-into-view="{{scrollToView}}"
+    bindscrolltoupper="loadMore"
+    bindscroll="onScrollMsg"
+    scroll-with-animation
+  >
+    <view class="msg-loading" wx:if="{{loading}}">
+      <text class="msg-loading-text">加载中...</text>
+    </view>
+    <view class="msg-list">
+      <block wx:for="{{messageList}}" wx:key="msgID">
+        <!-- 未读消息分界线 -->
+        <view class="unread-divider" wx:if="{{index === unreadDividerIndex && unreadDividerIndex >= 0}}" id="unread-divider">
+          <view class="unread-divider-line"></view>
+          <text class="unread-divider-text">以下为未读消息</text>
+          <view class="unread-divider-line"></view>
+        </view>
+
+        <!-- 时间分隔 -->
+        <view class="time-divider" wx:if="{{item.showTime}}">
+          <text class="time-divider-text">{{item.timeLabel}}</text>
+        </view>
+
+        <!-- 系统消息单独居中 -->
+        <view class="msg-system" wx:if="{{item.contentType === 5}}" id="msg-{{item.msgID}}">
+          <text class="msg-system-text">{{item.content}}</text>
+        </view>
+
+        <!-- 普通消息 -->
+        <view
+          class="msg-item {{item.senderID === myID ? 'msg-self' : 'msg-other'}}"
+          wx:else
+          id="msg-{{item.msgID}}"
+        >
+          <image
+            class="msg-avatar"
+            src="{{item.senderID === myID ? myAvatar : talkerAvatar}}"
+            mode="aspectFill"
+            catchtap="{{item.senderID !== myID ? 'goUserDetail' : ''}}"
+          ></image>
+
+          <view class="msg-body">
+            <view class="msg-bubble {{item.senderID === myID ? 'bubble-self' : 'bubble-other'}}">
+              <text class="msg-text">{{item.content}}</text>
+              <text class="msg-status {{item.status === 'read' ? 'msg-status-read' : ''}}" wx:if="{{item.senderID === myID}}">{{item.status === 'read' ? '✓✓' : item.status === 'sent' ? '✓' : ' '}}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+
+  <view class="new-msg-tip" wx:if="{{showNewMsgTip}}" bindtap="scrollToNewMsg">
+    <text class="new-msg-tip-text">↓ 未读消息</text>
+  </view>
+
+  <view class="input-bar" style="margin-bottom: {{keyboardHeight}}px;">
+    <input
+      class="msg-input"
+      placeholder="说点什么..."
+      placeholder-style="color:#C4B5D9"
+      value="{{inputValue}}"
+      focus="{{inputFocus}}"
+      bindinput="onInput"
+      confirm-type="send"
+      bindconfirm="sendMessage"
+      adjust-position="{{false}}"
+      bindfocus="onFocus"
+      bindblur="onBlur"
+    />
+    <view class="send-btn {{inputValue ? 'send-btn-active' : ''}}" bindtap="sendMessage">
+      <text class="send-btn-text">发送</text>
+    </view>
+  </view>
+</view>

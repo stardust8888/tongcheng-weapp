@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<title>爸妈来牵线</title>
+<style>
+  :root{
+    --paper:#F8F6F1; --ink:#1A1815; --ink-2:#46413A; --mute:#8A8378; --rule:#E3DDD2;
+    --thread:#BE3B33; --coral:#E8565A; --seal:#BE3B33; --chip:#EFE9DD; --chip-d:#E4DCCB;
+    --serif:'Noto Serif SC','Songti SC','STSong',serif;
+    --sans:'Noto Sans SC',-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;
+    --mono:'JetBrains Mono','SF Mono',Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+    --paper:#1B1714; --ink:#F2EDE3; --ink-2:#C9C1B4; --mute:#948C81; --rule:#322E27;
+    --thread:#D9544A; --coral:#E8706E; --seal:#D9544A; --chip:#241F1B; --chip-d:#2C2722;
+  }}
+  :root[data-theme="dark"]{
+    --paper:#1B1714; --ink:#F2EDE3; --ink-2:#C9C1B4; --mute:#948C81; --rule:#322E27;
+    --thread:#D9544A; --coral:#E8706E; --seal:#D9544A; --chip:#241F1B; --chip-d:#2C2722;
+  }
+  *{box-sizing:border-box}
+  html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+    font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+  .wrap{max-width:1040px;margin:0 auto;padding:48px 40px 72px}
+
+  /* title block — drafting title plate */
+  .plate{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;
+    padding-bottom:26px;border-bottom:2px solid var(--ink);position:relative}
+  .plate::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:120px;background:var(--thread)}
+  .plate h1{font-family:var(--serif);font-weight:700;font-size:46px;line-height:1.05;margin:0 0 6px;
+    letter-spacing:2px;text-wrap:balance}
+  .plate h1 .red{color:var(--thread)}
+  .plate .sub{font-size:14px;color:var(--ink-2);letter-spacing:.5px}
+  .plate .sub b{color:var(--ink);font-weight:500}
+  .meta{display:flex;flex-wrap:wrap;gap:10px}
+  .meta .s{font-family:var(--mono);font-size:12px;color:var(--ink-2);background:var(--chip);
+    padding:6px 11px;border-radius:2px;white-space:nowrap}
+  .meta .s b{color:var(--thread);font-weight:500}
+
+  .lede{margin:26px 0 0;font-size:15.5px;color:var(--ink-2);max-width:62ch}
+  .lede em{font-family:var(--serif);font-style:normal;color:var(--thread);font-weight:500}
+
+  /* section */
+  section{margin-top:54px}
+  .eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .eyebrow .k{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--thread);
+    text-transform:uppercase;font-weight:500}
+  .eyebrow .r{flex:1;height:1px;background:var(--rule)}
+  h2{font-family:var(--serif);font-weight:700;font-size:24px;margin:2px 0 20px;letter-spacing:.5px}
+
+  /* journey spine — the red thread */
+  .spine{position:relative;margin:8px 0 6px 18px;padding-left:30px;border-left:2px solid var(--thread)}
+  .stage{position:relative;padding:14px 0 16px}
+  .stage::before{content:"";position:absolute;left:-37px;top:20px;width:12px;height:12px;border-radius:50%;
+    background:var(--paper);border:2px solid var(--thread)}
+  .stage .stt{font-family:var(--serif);font-weight:700;font-size:17px;color:var(--ink)}
+  .stage .stt .n{font-family:var(--mono);font-size:12px;color:var(--thread);font-weight:500;margin-right:8px;vertical-align:2px}
+  .stage .sd{font-size:13.5px;color:var(--ink-2);margin-top:3px}
+  .stage .sd code{font-family:var(--mono);font-size:12px;color:var(--coral)}
+
+  /* tabBar bracket */
+  .tabs{display:flex;align-items:center;gap:0;margin:22px 0 4px;flex-wrap:wrap}
+  .tabs .lbl{font-family:var(--mono);font-size:11px;color:var(--mute);letter-spacing:1.5px;margin-right:14px}
+  .tab{font-family:var(--sans);font-size:13.5px;font-weight:500;color:var(--ink);background:var(--chip);
+    padding:7px 16px;border-radius:2px;position:relative}
+  .tab.live{color:var(--thread);background:var(--chip-d)}
+  .tabs .line{flex:0 0 22px;height:2px;background:var(--thread);margin:0 -1px}
+
+  /* zone */
+  .zone{margin-bottom:30px}
+  .zone-h{font-family:var(--sans);font-weight:700;font-size:15px;color:var(--ink);
+    margin:0 0 12px;padding-bottom:7px;border-bottom:1px solid var(--rule);display:flex;align-items:baseline;gap:10px}
+  .zone-h .zg{font-family:var(--mono);font-size:11px;color:var(--mute);font-weight:400;letter-spacing:1px}
+
+  .pg{display:grid;grid-template-columns:150px 1fr;gap:6px 18px;padding:11px 0;border-bottom:1px dashed var(--rule)}
+  .pg:last-child{border-bottom:0}
+  .pg .pl{font-family:var(--serif);font-weight:700;font-size:14.5px;color:var(--ink)}
+  .pg .pl .p{display:block;font-family:var(--mono);font-weight:400;font-size:11px;color:var(--mute);margin-top:2px;word-break:break-all}
+  .pg .pr{font-size:12.5px;color:var(--ink-2)}
+  .pg .role{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.5px;color:var(--thread);
+    background:var(--chip);padding:2px 7px;border-radius:2px;margin-right:6px;vertical-align:1px}
+  .pg .role.tab{color:var(--paper);background:var(--thread)}
+  .pg .role.entry{color:var(--thread);background:transparent;border:1px solid var(--thread)}
+  .api{display:inline-block;font-family:var(--mono);font-size:11px;color:var(--ink-2);background:var(--chip);
+    padding:2px 6px;border-radius:2px;margin:3px 6px 0 0}
+  .navo{color:var(--mute);font-size:11.5px;margin-top:4px;font-family:var(--mono)}
+  .navo b{color:var(--coral);font-weight:400}
+
+  /* dictionary */
+  .dict{display:grid;grid-template-columns:1fr 1fr;gap:0 32px}
+  .dl{padding:11px 0;border-bottom:1px solid var(--rule)}
+  .dl .f{font-family:var(--serif);font-weight:700;font-size:14px;color:var(--ink)}
+  .dl .f .u{font-family:var(--mono);font-weight:400;font-size:11px;color:var(--mute);margin-left:8px}
+  .dl .vs{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);margin-top:5px;line-height:1.85}
+  .dl .vs .c{color:var(--thread);font-weight:500;margin-right:3px}
+
+  /* backend cards */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .card{background:var(--chip);padding:16px 18px;border-radius:3px;border-left:3px solid var(--thread)}
+  .card .cn{font-family:var(--serif);font-weight:700;font-size:15px}
+  .card .cp{font-family:var(--mono);font-size:12px;color:var(--coral);margin:2px 0 8px}
+  .card .cd{font-size:12.5px;color:var(--ink-2);line-height:1.7}
+  .card .cd code{font-family:var(--mono);font-size:11px;color:var(--ink)}
+
+  /* lifecycle */
+  .life{display:flex;align-items:center;flex-wrap:wrap;gap:0;margin-top:6px}
+  .life .nd{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--ink);background:var(--chip);
+    padding:9px 14px;border-radius:2px;border:1px solid var(--rule)}
+  .life .nd.zero{border-color:var(--thread);color:var(--thread)}
+  .life .nd .st{display:block;font-family:var(--mono);font-size:10px;color:var(--mute);font-weight:400;margin-top:1px}
+  .life .ar{font-family:var(--mono);font-size:11px;color:var(--thread);padding:0 12px;position:relative;top:0}
+  .life .ar .d{display:block;color:var(--mute);font-size:10px}
+
+  .note{margin-top:48px;padding-top:18px;border-top:1px solid var(--rule);font-size:12px;color:var(--mute);line-height:1.7}
+  .note b{color:var(--ink-2);font-weight:500}
+
+  @media(max-width:720px){
+    .wrap{padding:36px 22px 56px}
+    .plate h1{font-size:34px}
+    .pg{grid-template-columns:1fr;gap:4px}
+    .dict{grid-template-columns:1fr}
+    .cards{grid-template-columns:1fr}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="plate">
+    <div>
+      <h1>爸妈来<span class="red">牵线</span></h1>
+      <div class="sub"><b>微信小程序</b> · 家长代子女相亲 · 完整产品图谱</div>
+    </div>
+    <div class="meta">
+      <span class="s"><b>16</b> 页面</span>
+      <span class="s"><b>4</b> tabBar</span>
+      <span class="s"><b>3</b> 后端服务</span>
+      <span class="s"><b>15天</b> 注销冷静期</span>
+    </div>
+  </header>
+
+  <p class="lede">「牵线」二字即是这张图的画法——一条<em>朱砂红线</em>串起登录、浏览、互动、自我、治理五个阶段，既是红娘文化里的红线，也是小程序的导航拓扑。下文为<em>去社交化之前</em>的全量产品形态。</p>
+
+  <!-- journey -->
+  <section>
+    <div class="eyebrow"><span class="k">01 · Journey</span><span class="r"></span></div>
+    <h2>产品旅程 · 一根红线</h2>
+
+    <div class="tabs">
+      <span class="lbl">TAB BAR</span>
+      <span class="tab live">发现</span><span class="line"></span>
+      <span class="tab">动态</span><span class="line"></span>
+      <span class="tab">消息</span><span class="line"></span>
+      <span class="tab">我的</span>
+    </div>
+
+    <div class="spine">
+      <div class="stage"><div class="stt"><span class="n">01</span>登录</div>
+        <div class="sd">微信授权 <code>login.code</code> → 后端换 openID/session；<code>getPhoneNumber</code> 取手机号。启动即落 <code>/pages/discover</code>。</div></div>
+      <div class="stage"><div class="stt"><span class="n">02</span>浏览</div>
+        <div class="sd">发现页只读卡片流，点入个人主页看对方子女全资料；<code>找家长</code>发起招呼。</div></div>
+      <div class="stage"><div class="stt"><span class="n">03</span>互动</div>
+        <div class="sd">关注 / 动态 UGC / 消息 IM / 聊天——社交与即时通讯层。</div></div>
+      <div class="stage"><div class="stt"><span class="n">04</span>自我</div>
+        <div class="sd">我的 → 编辑子女资料、家长资料；资料经审核后上发现页。</div></div>
+      <div class="stage"><div class="stt"><span class="n">05</span>治理</div>
+        <div class="sd">设置 → 注销（15 天冷静期可撤销）/ 黑名单 / 退出登录。</div></div>
+    </div>
+  </section>
+
+  <!-- page inventory -->
+  <section>
+    <div class="eyebrow"><span class="k">02 · Pages</span><span class="r"></span></div>
+    <h2>页面清单 · 十六页</h2>
+
+    <div class="zone">
+      <div class="zone-h">登录与协议 <span class="zg">2 PAGES</span></div>
+      <div class="pg"><div class="pl">登录<span class="p">pages/login/index</span></div>
+        <div class="pr"><span class="role entry">入口</span><span class="api">POST /fast/login</span><span class="api">GET /user/phone</span>
+          <div class="navo">→ <b>discover</b>(tab) · <b>profile</b>(tab) · <b>agreement</b></div></div></div>
+      <div class="pg"><div class="pl">协议<span class="p">pages/login/agreement</span></div>
+        <div class="pr"><span class="role">静态</span>用户协议 / 隐私政策，<code>?type=user|privacy</code> 切换。
+          <div class="navo">from <b>login</b></div></div></div>
+    </div>
+
+    <div class="zone">
+      <div class="zone-h">发现与详情 <span class="zg">2 PAGES</span></div>
+      <div class="pg"><div class="pl">发现<span class="p">pages/discover/index</span></div>
+        <div class="pr"><span class="role tab">TAB·启动</span><span class="api">GET /discover/list</span>
+          <div class="navo">→ <b>home</b> · 招呼(WS)</div></div></div>
+      <div class="pg"><div class="pl">个人主页<span class="p">pages/profile/home/index</span></div>
+        <div class="pr"><span class="role hub">详情枢纽</span><span class="api">GET /user/home</span><span class="api">POST /user/watch</span><span class="api">POST /moment/like</span><span class="api">POST /moment/comment/create</span>
+          <div class="navo">from <b>discover</b>·<b>moments</b>·<b>watch-list</b>·<b>interaction-list</b>·<b>black-list</b>·<b>chat</b></div></div></div>
+    </div>
+
+    <div class="zone">
+      <div class="zone-h">动态 · UGC <span class="zg">3 PAGES</span></div>
+      <div class="pg"><div class="pl">动态<span class="p">pages/moments/index</span></div>
+        <div class="pr"><span class="role tab">TAB</span><span class="api">GET /moment/list/withComment</span><span class="api">POST /user/watch(±)</span><span class="api">POST /moment/comment/create</span>
+          <div class="navo">→ <b>post</b> · <b>home</b></div></div></div>
+      <div class="pg"><div class="pl">发动态<span class="p">pages/moments/post/index</span></div>
+        <div class="pr"><span class="role">发布</span><span class="api">POST /moment/create</span> 文本+图片，经 msgSecCheck/imgSecCheck。
+          <div class="navo">from <b>moments</b>·<b>my-moments</b></div></div></div>
+      <div class="pg"><div class="pl">我的动态<span class="p">pages/profile/my-moments/index</span></div>
+        <div class="pr"><span class="api">GET /moment/myList</span><span class="api">POST /moment/delete</span><span class="api">POST /moment/like</span><span class="api">POST /moment/comment/create</span>
+          <div class="navo">→ <b>post</b></div></div></div>
+    </div>
+
+    <div class="zone">
+      <div class="zone-h">消息 · IM <span class="zg">2 PAGES</span></div>
+      <div class="pg"><div class="pl">消息<span class="p">pages/messages/index</span></div>
+        <div class="pr"><span class="role tab">TAB</span><span class="api">GET /chat/list</span> 会话列表 + 未读徽标。</div></div>
+      <div class="pg"><div class="pl">聊天<span class="p">pages/messages/chat/index</span></div>
+        <div class="pr"><span class="api">GET /chat/list</span><span class="api">GET /message/list</span> WebSocket 实时收发。
+          <div class="navo">→ <b>home</b></div></div></div>
+    </div>
+
+    <div class="zone">
+      <div class="zone-h">我的 · 个人中心 <span class="zg">7 PAGES</span></div>
+      <div class="pg"><div class="pl">我的<span class="p">pages/profile/index</span></div>
+        <div class="pr"><span class="role tab">TAB</span><span class="api">GET /user/profile</span> 互动统计 + 菜单入口。
+          <div class="navo">→ <b>edit-child</b>·<b>edit-profile</b>·<b>settings</b>·<b>home</b>·<b>watch-list</b>·<b>my-moments</b>·<b>interaction-list</b>·<b>black-list</b></div></div></div>
+      <div class="pg"><div class="pl">编辑资料<span class="p">pages/profile/edit-child/index</span></div>
+        <div class="pr"><span class="role">子女</span><span class="api">GET /user/profile</span><span class="api">POST /user/child/update</span><span class="api">POST /user/child/create</span> 含图片上传，msgSecCheck 审文本。</div></div>
+      <div class="pg"><div class="pl">我的资料<span class="p">pages/profile/edit-profile/index</span></div>
+        <div class="pr"><span class="role">家长</span><span class="api">GET /user/profile</span><span class="api">POST /user/profile/update</span></div></div>
+      <div class="pg"><div class="pl">我的关注<span class="p">pages/profile/watch-list/index</span></div>
+        <div class="pr"><span class="api">GET /user/watch/List</span><span class="api">POST /user/watch/cancel</span><span class="api">POST /chat/create</span>
+          <div class="navo">→ <b>chat</b> · <b>home</b></div></div></div>
+      <div class="pg"><div class="pl">互动列表<span class="p">pages/profile/interaction-list/index</span></div>
+        <div class="pr"><span class="api">GET /user/like|comment|view/me</span> 点赞 / 评论 / 访客聚合。
+          <div class="navo">→ <b>home</b></div></div></div>
+      <div class="pg"><div class="pl">黑名单<span class="p">pages/profile/black-list/index</span></div>
+        <div class="pr"><span class="api">GET /user/black/list</span><span class="api">POST /user/black/remove</span>
+          <div class="navo">→ <b>home</b></div></div></div>
+      <div class="pg"><div class="pl">设置<span class="p">pages/profile/settings/index</span></div>
+        <div class="pr"><span class="api">GET /user/delete/apply</span><span class="api">POST /user/delete/apply</span><span class="api">POST /user/delete/cancel</span><span class="api">POST /loginOut</span> 主题 / 缓存 / 注销 / 退出。</div></div>
+    </div>
+  </section>
+
+  <!-- data dictionary -->
+  <section>
+    <div class="eyebrow"><span class="k">03 · Data</span><span class="r"></span></div>
+    <h2>相亲资料词典 · 编码值</h2>
+    <p class="lede" style="margin-top:0;margin-bottom:18px">UserChild 表的真实尺度——身高按厘米、体重按公斤存 int，枚举字段以 0 为「未记录」基线，编码即语义。</p>
+    <div class="dict">
+      <div class="dl"><div class="f">relation <span class="u">关系</span></div><div class="vs"><span class="c">0</span>未记录 <span class="c">1</span>儿子 <span class="c">2</span>女儿</div></div>
+      <div class="dl"><div class="f">education <span class="u">学历</span></div><div class="vs"><span class="c">0</span>未记录 <span class="c">1</span>高中 <span class="c">2</span>大专 <span class="c">3</span>本科 <span class="c">4</span>硕士 <span class="c">5</span>博士</div></div>
+      <div class="dl"><div class="f">marital_status <span class="u">婚姻</span></div><div class="vs"><span class="c">0</span>未记录 <span class="c">1</span>未婚 <span class="c">2</span>离异 <span class="c">3</span>丧偶</div></div>
+      <div class="dl"><div class="f">marital_plan <span class="u">婚期</span></div><div class="vs"><span class="c">0</span>未记录 <span class="c">1</span>尽快 <span class="c">2</span>一年内 <span class="c">3</span>两年内 <span class="c">4</span>时机成熟</div></div>
+      <div class="dl"><div class="f">house <span class="u">房产</span></div><div class="vs"><span class="c">0</span>未记录 <span class="c">1</span>暂未购房 <span class="c">2</span>一套 <span class="c">3</span>两套及以上</div></div>
+      <div class="dl"><div class="f">car <span class="u">车辆</span></div><div class="vs"><span class="c">0</span>未记录 <span class="c">1</span>暂未购车 <span class="c">2</span>一辆 <span class="c">3</span>两辆及以上</div></div>
+      <div class="dl"><div class="f">year_income <span class="u">年收入</span></div><div class="vs"><span class="c">0</span>未记录 <span class="c">1</span>≤10w <span class="c">2</span>10–20w <span class="c">3</span>20–30w <span class="c">4</span>30–50w <span class="c">5</span>≥50w</div></div>
+      <div class="dl"><div class="f">is_only_child <span class="u">独生</span></div><div class="vs"><span class="c">0</span>未记录 <span class="c">1</span>不是 <span class="c">2</span>是</div></div>
+      <div class="dl"><div class="f">height / weight <span class="u">cm / kg</span></div><div class="vs">int 整数存储</div></div>
+      <div class="dl"><div class="f">status / review_status <span class="u">展示/审核</span></div><div class="vs">status <span class="c">0</span>未展示 <span class="c">1</span>展示 · review <span class="c">0</span>未审 <span class="c">1</span>通过 <span class="c">2</span>拒绝</div></div>
+    </div>
+    <p class="lede" style="margin-top:18px;margin-bottom:0">家长表 User 关键字段：<code style="font-family:var(--mono);font-size:12px;color:var(--coral)">wx_open_id</code>(uniqueIndex) · phone+suffix · role <span style="color:var(--thread)">1父 2母</span> · is_vip · register_ip · promoter。</p>
+  </section>
+
+  <!-- backend -->
+  <section>
+    <div class="eyebrow"><span class="k">04 · Backend</span><span class="r"></span></div>
+    <h2>后端服务与生命周期</h2>
+    <div class="cards">
+      <div class="card"><div class="cn">service/web</div><div class="cp">:12001</div>
+        <div class="cd">用户 / 发现 / 动态 / 消息 / 聊天 / 内容安全。gin + mysql + redis + snowflake(1) + wxapi。</div></div>
+      <div class="card"><div class="cn">service/cron</div><div class="cp">:12005</div>
+        <div class="cd">robfig/cron + redis 锁。<code>save_message 0 3 * * *</code> · <code>delete_user_apply 0 * * * *</code>。snowflake(5)。</div></div>
+      <div class="card"><div class="cn">service/admin</div><div class="cp">审核后台</div>
+        <div class="cd">子女资料 / 动态审核（review_status 0→1/2），用户禁用。</div></div>
+    </div>
+
+    <div style="margin-top:30px">
+      <div class="zone-h" style="border-bottom:0">内容安全 <span class="zg">msgSecCheck · imgSecCheck</span></div>
+      <p class="lede" style="margin:4px 0 0">文本走 <code style="font-family:var(--mono);font-size:12px;color:var(--coral)">security.msgSecCheck</code>，图片走 <code style="font-family:var(--mono);font-size:12px;color:var(--coral)">security.imgSecCheck</code>（multipart media）。命中 <code style="font-family:var(--mono);font-size:12px;color:var(--thread)">errcode 87014</code> 即风险内容，免费且有限速。</p>
+    </div>
+
+    <div style="margin-top:30px">
+      <div class="zone-h" style="border-bottom:0">注销生命周期 <span class="zg">UserDeleteApply · status 0/1/2</span></div>
+      <div class="life" style="margin-top:14px">
+        <div class="nd zero">提交申请<span class="st">status 0 · apply_at</span></div>
+        <div class="ar">—15天→<span class="d">cron 扫描</span></div>
+        <div class="nd">删除账号<span class="st">status 1 · process_at</span></div>
+      </div>
+      <div class="life" style="margin-top:8px">
+        <div class="nd zero">提交申请<span class="st">status 0</span></div>
+        <div class="ar">—用户撤销→<span class="d">留痕不删</span></div>
+        <div class="nd">已取消<span class="st">status 2 · process_at</span></div>
+      </div>
+      <p class="lede" style="margin:14px 0 0;font-size:13px">硬删账号以释放 <code style="font-family:var(--mono);font-size:12px;color:var(--coral)">wx_open_id</code> 唯一索引，便于同一微信号重新注册；取消则置 2 留全生命周期审计痕。</p>
+    </div>
+  </section>
+
+  <p class="note">本图谱展示<b>去社交化之前</b>的完整产品形态——16 页全量、4 tab、IM 与 UGC 动态俱全。当前线上 <code style="font-family:var(--mono)">app.json</code> 仅注册 8 页、2 tab，去社交化方案见 plan：<b>stateful-whistling-rose</b>。红线（朱砂 <b>#BE3B33</b>）取自婚庆礼俗，亦为「牵线」之字面。</p>
+
+</div>
+</body>
+</html>

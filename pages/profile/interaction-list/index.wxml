@@ -1,0 +1,28 @@
+<view class="page-interaction {{themeClass}}">
+  <view class="interaction-list" wx:if="{{list.length > 0}}">
+    <view class="simple-card" wx:for="{{list}}" wx:key="index" bindtap="goDetail" data-userid="{{item.userID}}">
+      <image class="simple-avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+      <view class="simple-content">
+        <view class="simple-name-row">
+          <text class="simple-name">{{item.username}}</text>
+          <text class="simple-time" wx:if="{{item.time}}">{{item.time}}</text>
+        </view>
+        <text class="simple-action" wx:if="{{type === 'view'}}">查看了我</text>
+        <text class="simple-action" wx:if="{{type === 'watch'}}">关注了我</text>
+        <text class="simple-action" wx:if="{{type === 'like'}}">点赞了我</text>
+        <text class="simple-action" wx:if="{{type === 'comment'}}">评论了我：{{item.commentContent}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading-wrap" wx:if="{{loading}}">
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <view class="empty-wrap" wx:if="{{loaded && list.length === 0}}">
+    <text class="empty-icon">{{emptyIcon}}</text>
+    <text class="empty-text">{{emptyText}}</text>
+    <text class="empty-hint">去发动态让更多人看到你吧</text>
+  </view>
+
+</view>

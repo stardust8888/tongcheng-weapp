@@ -1,0 +1,29 @@
+<view class="page-messages {{themeClass}}">
+  <scroll-view class="chat-scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="chat-list" wx:if="{{chatList.length > 0}}">
+      <view class="chat-card" wx:for="{{chatList}}" wx:key="chatID" bindtap="goChat" data-chatid="{{item.chatID}}" data-talkerid="{{item.talkerID}}" data-unread="{{item.unread}}">
+        <view class="chat-avatar-wrap">
+          <image class="chat-avatar" src="{{item.avatar}}" mode="aspectFill" wx:if="{{item.avatar}}"></image>
+          <view class="chat-avatar chat-avatar-default" wx:else>
+            <text class="avatar-text">{{item.nickname[0] || '用'}}</text>
+          </view>
+          <view class="unread-badge" wx:if="{{item.unread > 0}}">
+            <text class="unread-text">{{item.unread > 99 ? '99+' : item.unread}}</text>
+          </view>
+        </view>
+        <view class="chat-content">
+          <text class="chat-name">{{item.nickname}}</text>
+          <text class="chat-msg">{{item.lastMessage}}</text>
+        </view>
+        <text class="chat-time">{{item.time}}</text>
+      </view>
+    </view>
+
+    <view class="empty-card" wx:if="{{chatList.length === 0}}">
+      <text class="empty-icon">💬</text>
+      <text class="empty-text">暂无消息</text>
+      <text class="empty-hint">去打个招呼吧</text>
+    </view>
+  </scroll-view>
+
+</view>

@@ -1,0 +1,55 @@
+<view class="page-watch {{themeClass}}">
+  <view class="watch-list" wx:if="{{watchList.length > 0}}">
+    <view class="watch-card" wx:for="{{watchList}}" wx:key="userID">
+      <!-- 子女卡片：与推荐页一致 -->
+      <view class="card-body">
+        <view class="card-avatar-wrap">
+          <image class="card-avatar" src="{{item.photo}}" mode="aspectFill"></image>
+          <view class="card-match-tag" wx:if="{{item.relationLabel}}">{{item.relationLabel}}</view>
+        </view>
+        <view class="card-info">
+          <text class="card-summary" wx:if="{{item.summary}}">{{item.summary}}</text>
+          <view class="card-detail-list">
+            <view class="card-detail-row" wx:if="{{item.income}}">
+              <text class="detail-label">年薪</text>
+              <text class="detail-value">{{item.income}}</text>
+            </view>
+            <view class="card-detail-row" wx:if="{{item.company}}">
+              <text class="detail-label">单位</text>
+              <text class="detail-value">{{item.company}}</text>
+            </view>
+            <view class="card-detail-row" wx:if="{{item.work}}">
+              <text class="detail-label">工作</text>
+              <text class="detail-value">{{item.work}}</text>
+            </view>
+            <view class="card-detail-row" wx:if="{{item.location}}">
+              <text class="detail-label">地点</text>
+              <text class="detail-value">{{item.location}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="card-desc" wx:if="{{item.description}}">
+        <text class="desc-text">{{item.description}}</text>
+      </view>
+
+      <!-- 家长行：头像+名字 左，打招呼 右 -->
+      <view class="card-parent">
+        <image class="parent-avatar" src="{{item.avatar}}" mode="aspectFill" catchtap="goUserDetail" data-userid="{{item.userID}}"></image>
+        <text class="parent-name">{{item.username}}</text>
+        <view class="watch-toggle" catchtap="toggleWatch" data-userid="{{item.userID}}">
+          <text class="watch-toggle-text">已关注</text>
+        </view>
+        <view class="btn-hello" catchtap="sayHello" data-userid="{{item.userID}}">打招呼</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty-wrap" wx:if="{{loaded && watchList.length === 0}}">
+    <text class="empty-icon">💝</text>
+    <text class="empty-text">还没有关注的人</text>
+    <text class="empty-hint">去看看感兴趣的对象吧</text>
+  </view>
+
+</view>

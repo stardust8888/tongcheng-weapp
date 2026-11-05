@@ -1,0 +1,115 @@
+page {
+  --tp: #F06B6B;
+  --tp-l: #FF8A8A;
+  --tp-ll: #FFB0B0;
+  --tp-g: #FF9E9E;
+  --tp-d: #C94545;
+  --tp-dd: #D94F4F;
+  --tp-m: #F07575;
+  --tb: #FFF5F5;
+  --tb-l: #FFF0F0;
+  --tb-ll: #FFF7F7;
+  --tb-lll: #FFEFEF;
+  --tb-a: #FFE8E8;
+  --tb-a2: #FFE0E0;
+  --tt: #4E1A1A;
+  --tt-m: #5E3A3A;
+  --tm: #F0C0C0;
+  --tm-d: #C0A0A0;
+  --tm-l: #E8C8C8;
+  --tm-w: #BFA09A;
+  --ts: 240, 107, 107;
+  background: #F5F5F5;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
+  font-size: 30rpx;
+  color: #26292C;
+  box-sizing: border-box;
+}
+
+.theme-purple {
+  --tp: #8841F3;
+  --tp-l: #A855F7;
+  --tp-ll: #C084FC;
+  --tp-g: #B98BFF;
+  --tp-d: #6B21A8;
+  --tp-dd: #7B2FF2;
+  --tp-m: #9B5BF6;
+  --tb: #F5F3F8;
+  --tb-l: #F3EAFF;
+  --tb-ll: #FAF7FF;
+  --tb-lll: #F0EAF8;
+  --tb-a: #EDE7F6;
+  --tb-a2: #E8DFF5;
+  --tt: #2d1a4e;
+  --tt-m: #4a3a5e;
+  --tm: #C9B0F0;
+  --tm-d: #A090C0;
+  --tm-l: #D0C0E8;
+  --tm-w: #A99ABF;
+  --ts: 136, 65, 243;
+}
+
+view, text, image {
+  box-sizing: border-box;
+}
+
+.tag-match {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rpx 20rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  background: linear-gradient(-35deg, var(--tp-g) 0%, var(--tp) 100%);
+  color: #fff;
+}
+
+.tag-relation {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rpx 20rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  background: #FFF2E4;
+  color: #FF8400;
+}
+
+.tag-year {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rpx 20rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  background: #FFF2E4;
+  color: #FF8400;
+}
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 88rpx;
+  background: linear-gradient(-35deg, var(--tp-g) 0%, var(--tp) 100%);
+  color: #fff;
+  border-radius: 16rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.btn-outline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 88rpx;
+  border: 2rpx solid var(--tp);
+  color: var(--tp);
+  border-radius: 16rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  background: #fff;
+}

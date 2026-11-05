@@ -1,0 +1,77 @@
+<view class="page-feedback {{themeClass}}">
+  <view class="feedback-list">
+    <view class="feedback-card" wx:for="{{feedbackList}}" wx:key="id">
+      <view class="card-section">
+        <view class="section-label">
+          <view class="label-left">
+            <text class="label-icon">🙋</text>
+            <text class="label-text">我的问题</text>
+          </view>
+          <view class="card-status {{item.reply ? 'status-replied' : 'status-pending'}}">{{item.reply ? '已回复' : '处理中'}}</view>
+        </view>
+        <view class="section-body">{{item.content}}</view>
+        <view class="section-meta">
+          <text class="meta-icon">🕐</text>
+          <text class="meta-label">反馈时间：</text>
+          <text class="meta-value">{{item.time}}</text>
+        </view>
+      </view>
+
+      <view class="card-section section-reply" wx:if="{{item.reply}}">
+        <view class="section-label">
+          <view class="label-left">
+            <text class="label-icon">💬</text>
+            <text class="label-text">官方回复</text>
+          </view>
+        </view>
+        <view class="section-body">{{item.reply}}</view>
+        <view class="section-meta">
+          <text class="meta-icon">🕐</text>
+          <text class="meta-label">回复时间：</text>
+          <text class="meta-value">{{item.replyAt}}</text>
+        </view>
+      </view>
+
+      <view class="card-section section-reply section-pending" wx:else>
+        <view class="section-label">
+          <view class="label-left">
+            <text class="label-icon">💬</text>
+            <text class="label-text">官方回复</text>
+          </view>
+        </view>
+        <view class="pending-text">客服正在处理，请耐心等待</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="list-footer" wx:if="{{feedbackList.length > 0}}">
+    <text class="footer-text">{{noMore ? '没有更多了' : (loading ? '加载中...' : '')}}</text>
+  </view>
+
+  <view class="empty-state" wx:if="{{!loading && feedbackList.length === 0}}">
+    <text class="empty-icon">💬</text>
+    <text class="empty-text">还没有反馈</text>
+    <text class="empty-hint">点击右下角提交你的反馈或建议</text>
+  </view>
+
+  <view class="fab-feedback" bindtap="openInput">
+    <text class="fab-text">写反馈</text>
+  </view>
+
+  <view class="feedback-mask" wx:if="{{showInput}}" bindtap="closeInput"></view>
+  <view class="feedback-sheet" wx:if="{{showInput}}">
+    <view class="sheet-header">
+      <text class="sheet-title">写反馈</text>
+      <view class="sheet-close" bindtap="closeInput">×</view>
+    </view>
+    <textarea class="feedback-textarea"
+      value="{{inputValue}}"
+      placeholder="请输入您的问题或建议…"
+      placeholder-class="textarea-ph"
+      auto-focus
+      auto-height
+      maxlength="500"
+      bindinput="onInput" />
+    <view class="feedback-send-btn {{submitting ? 'disabled' : ''}}" bindtap="submit">{{submitting ? '提交中…' : '提交'}}</view>
+  </view>
+</view>

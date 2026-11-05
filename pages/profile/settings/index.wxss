@@ -1,0 +1,133 @@
+.page-settings {
+  min-height: 100vh;
+  background: var(--tb);
+  padding-top: 24rpx;
+}
+
+.settings-section {
+  margin: 0 32rpx 32rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.04);
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 36rpx 36rpx;
+}
+
+.settings-row + .settings-row {
+  border-top: 1rpx solid var(--tb-ll);
+}
+
+.settings-label {
+  font-size: 34rpx;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.settings-right {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.settings-value {
+  font-size: 30rpx;
+  color: #666;
+}
+
+.settings-arrow {
+  font-size: 40rpx;
+  color: #999;
+  font-weight: 300;
+}
+
+.theme-options {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.theme-option {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  min-height: 88rpx;
+  padding: 0 24rpx;
+  border-radius: 12rpx;
+  border: 2rpx solid #e0e0e0;
+  background: #fafafa;
+}
+
+.theme-option.selected {
+  border-color: var(--tp);
+  background: var(--tb-l);
+}
+
+.theme-dot {
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+}
+
+.coral-dot {
+  background: linear-gradient(135deg, #F06B6B, #FF8A8A);
+}
+
+.purple-dot {
+  background: linear-gradient(135deg, #8841F3, #A855F7);
+}
+
+.theme-name {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.theme-option.selected .theme-name {
+  color: var(--tp);
+  font-weight: 600;
+}
+
+.logout-wrap {
+  margin: 80rpx 32rpx 0;
+}
+
+.logout-btn {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 32rpx 0;
+  text-align: center;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.04);
+}
+
+.logout-text {
+  font-size: 34rpx;
+  color: #E53935;
+  font-weight: 600;
+}
+
+.delete-applied-row {
+  align-items: flex-start;
+}
+
+.delete-applied-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  flex: 1;
+}
+
+.delete-applied-desc {
+  font-size: 26rpx;
+  color: #555;
+  line-height: 1.6;
+}
+
+.cancel-text {
+  color: var(--tp);
+}

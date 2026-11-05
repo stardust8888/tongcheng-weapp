@@ -1,0 +1,132 @@
+.page-post {
+  background: var(--tb);
+  min-height: 100vh;
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+.post-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  box-shadow: 0 4rpx 20rpx rgba(var(--ts), 0.06);
+}
+
+.post-input {
+  width: 100%;
+  min-height: 240rpx;
+  font-size: 32rpx;
+  color: #333;
+  line-height: 1.8;
+  box-sizing: border-box;
+}
+
+/* 照片网格 */
+.photo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-top: 24rpx;
+}
+
+.photo-item {
+  position: relative;
+  width: calc((100% - 32rpx) / 3);
+  aspect-ratio: 1;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.photo-img {
+  width: 100%;
+  height: 100%;
+}
+
+.photo-del {
+  position: absolute;
+  top: 8rpx;
+  right: 8rpx;
+  width: 56rpx;
+  height: 56rpx;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 36rpx;
+  line-height: 1;
+}
+
+.photo-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-text {
+  font-size: 26rpx;
+  color: #fff;
+}
+
+.photo-add {
+  width: calc((100% - 32rpx) / 3);
+  aspect-ratio: 1;
+  border: 2rpx dashed #C4B5D9;
+  border-radius: 16rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  background: var(--tb-ll);
+}
+
+.add-icon {
+  font-size: 56rpx;
+  color: var(--tp);
+  font-weight: 300;
+  line-height: 1;
+}
+
+.add-text {
+  font-size: 26rpx;
+  color: var(--tp);
+}
+
+/* 底部 */
+.post-footer {
+  margin-top: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8rpx;
+}
+
+.post-count {
+  font-size: 26rpx;
+  color: #777;
+}
+
+.btn-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 88rpx;
+  padding: 0 80rpx;
+  background: linear-gradient(135deg, var(--tp), var(--tp-l));
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 600;
+  border-radius: 44rpx;
+}
+
+.btn-submit.disabled {
+  opacity: 0.6;
+}

@@ -1,0 +1,97 @@
+<view class="page-moments {{themeClass}}">
+  <view class="moment-list">
+    <view class="moment-card" wx:for="{{momentList}}" wx:key="id">
+      <view class="moment-header">
+        <view class="moment-user">
+          <image class="moment-avatar" src="{{item.avatar}}" mode="aspectFill" wx:if="{{item.avatar}}" catchtap="goUserDetail" data-userid="{{item.userID}}"></image>
+          <view class="moment-avatar moment-avatar-default" wx:else catchtap="goUserDetail" data-userid="{{item.userID}}">
+            <text class="avatar-text">{{item.nickname[0] || '用'}}</text>
+          </view>
+          <view class="moment-user-info">
+            <view class="moment-name-row">
+              <text class="moment-nickname">{{item.nickname}}</text>
+              <view class="tag-verified" wx:if="{{item.isVip}}">VIP</view>
+            </view>
+            <text class="moment-meta">{{item.time}}</text>
+          </view>
+        </view>
+        <view class="follow-btn {{item.isWatched ? 'followed' : ''}}" wx:if="{{item.userID !== myID}}" bindtap="toggleFollow" data-id="{{item.id}}" data-userid="{{item.userID}}">
+          <text>{{item.isWatched ? '已关注' : '+ 关注'}}</text>
+        </view>
+      </view>
+
+      <text class="moment-text">{{item.content}}</text>
+
+      <view class="moment-images" wx:if="{{item.images.length > 0}}">
+        <image
+          wx:for="{{item.images}}"
+          wx:for-item="img"
+          wx:key="*this"
+          class="moment-img {{item.images.length === 1 ? 'single' : ''}}"
+          src="{{img}}"
+          mode="{{item.images.length === 1 ? 'widthFix' : 'aspectFill'}}"
+          bindtap="previewImage"
+          data-current="{{img}}"
+          data-urls="{{item.images}}"
+        ></image>
+      </view>
+
+      <view class="moment-footer">
+        <view class="moment-actions">
+          <view class="moment-action" bindtap="likePost" data-id="{{item.id}}">
+            <text class="action-icon {{item.isLiked ? 'liked' : ''}}">{{item.isLiked ? '💖' : '❤️'}}</text>
+            <text class="action-count {{item.isLiked ? 'liked' : ''}}">{{item.likeCount}}</text>
+          </view>
+          <view class="moment-action" bindtap="openComment" data-id="{{item.id}}">
+            <view class="action-icon icon-comment"></view>
+            <text class="action-count">{{item.commentCount}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="comment-section" wx:if="{{item.comments.length > 0}}">
+        <view class="comment-item" wx:for="{{item.comments}}" wx:for-item="c" wx:key="id"
+              wx:if="{{index < 3 || item.showAllComments}}"
+              bindtap="replyComment"
+              data-momentid="{{item.id}}"
+              data-userid="{{c.userID}}"
+              data-username="{{c.username}}">
+          <text class="comment-user">{{c.username}}</text>
+          <text class="comment-reply" wx:if="{{c.replierName}}"> 回复 </text><text class="comment-replier" wx:if="{{c.replierName}}">{{c.replierName}}</text>
+          <text class="comment-text">：{{c.content}}</text>
+        </view>
+        <view class="comment-more" wx:if="{{item.comments.length > 3 && !item.showAllComments}}"
+              catchtap="showMoreComments" data-id="{{item.id}}">
+          <text class="comment-more-text">查看全部 {{item.comments.length}} 条评论</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="list-footer" wx:if="{{momentList.length > 0}}">
+    <text class="footer-text">{{noMore ? '没有更多了' : (loading ? '加载中...' : '')}}</text>
+  </view>
+
+  <view class="empty-state" wx:if="{{!loading && momentList.length === 0}}">
+    <text class="empty-icon">📝</text>
+    <text class="empty-text">暂无动态</text>
+    <text class="empty-hint">关注好友后可查看动态</text>
+  </view>
+
+  <view class="fab-post {{fabHidden ? 'fab-hidden' : ''}}" bindtap="goPost">
+    <text class="fab-text">发动态</text>
+  </view>
+
+  <view class="comment-bar" wx:if="{{commentMomentID > 0}}">
+    <input class="comment-input"
+           value="{{commentInput}}"
+           placeholder="{{commentPlaceholder}}"
+           focus="{{inputFocus}}"
+           bindinput="onCommentInput"
+           bindblur="onCommentBlur"
+           confirm-type="send"
+           bindconfirm="sendComment" />
+    <view class="comment-send-btn" bindtap="sendComment">发送</view>
+  </view>
+
+</view>

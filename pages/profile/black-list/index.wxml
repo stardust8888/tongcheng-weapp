@@ -1,0 +1,20 @@
+<view class="page-blacklist {{themeClass}}">
+  <view class="black-list" wx:if="{{list.length > 0}}">
+    <view class="black-card" wx:for="{{list}}" wx:key="blackUserID">
+      <image class="black-avatar" src="{{item.avatar || '/assets/avatar/default.png'}}" mode="aspectFill" bindtap="goDetail" data-userid="{{item.blackUserID}}"></image>
+      <text class="black-name" bindtap="goDetail" data-userid="{{item.blackUserID}}">{{item.username}}</text>
+      <view class="remove-btn" catchtap="removeBlack" data-userid="{{item.blackUserID}}">
+        <text class="remove-text">移除</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading-wrap" wx:if="{{loading}}">
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <view class="empty-wrap" wx:if="{{loaded && list.length === 0}}">
+    <text class="empty-icon">🕊️</text>
+    <text class="empty-text">黑名单为空</text>
+  </view>
+</view>

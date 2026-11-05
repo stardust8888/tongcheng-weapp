@@ -1,0 +1,76 @@
+<page-meta page-style="{{pickerVisible || avatarPickerVisible ? 'overflow: hidden;' : ''}}"></page-meta>
+<view class="page-edit {{themeClass}}">
+  <view class="section">
+    <view class="section-header">
+      <view class="section-dot"></view>
+      <text class="section-title">个人信息</text>
+    </view>
+    <view class="form-card">
+      <view class="form-row">
+        <text class="form-label">昵称</text>
+        <view class="form-value-wrap">
+          <input class="form-input" value="{{username}}" data-field="username" bindinput="onInput" placeholder="请输入昵称" />
+        </view>
+      </view>
+
+      <view class="form-row" bindtap="openAvatarPicker">
+        <text class="form-label">头像</text>
+        <view class="form-value-wrap">
+          <image class="form-avatar" src="{{avatarDisplay}}" mode="aspectFill"></image>
+          <text class="form-arrow">›</text>
+        </view>
+      </view>
+
+      <view class="form-row" bindtap="openRolePicker">
+        <text class="form-label">身份</text>
+        <view class="form-value-wrap">
+          <text class="form-value {{role ? '' : 'placeholder'}}">{{role ? roleOptions[role] : '请选择'}}</text>
+          <text class="form-arrow">›</text>
+        </view>
+      </view>
+
+      <view class="form-row">
+        <text class="form-label">微信号</text>
+        <view class="form-value-wrap">
+          <input class="form-input" value="{{wxAccount}}" data-field="wxAccount" bindinput="onInput" placeholder="请输入微信号" />
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="save-area">
+    <button class="save-btn {{saving ? 'loading' : ''}}" bindtap="onSave" disabled="{{saving}}">
+      {{saving ? '保存中...' : '保存资料'}}
+    </button>
+  </view>
+
+  <view class="picker-mask {{pickerVisible ? 'show' : ''}}" bindtap="closePicker" catchtouchmove="noop"></view>
+  <view class="picker-sheet {{pickerVisible ? 'show' : ''}}">
+    <view class="picker-header">
+      <view class="picker-cancel" bindtap="closePicker">取消</view>
+      <text class="picker-title">{{pickerTitle}}</text>
+      <view class="picker-confirm" bindtap="confirmPicker">确定</view>
+    </view>
+    <view class="picker-body">
+      <picker-view class="picker-view" indicator-class="picker-indicator" value="{{pickerViewValue}}" bindchange="onPickerViewChange">
+        <picker-view-column>
+          <view class="picker-item" wx:for="{{pickerDisplayOptions}}" wx:key="index">{{item}}</view>
+        </picker-view-column>
+      </picker-view>
+    </view>
+  </view>
+
+  <view class="picker-mask {{avatarPickerVisible ? 'show' : ''}}" bindtap="closeAvatarPicker" catchtouchmove="noop"></view>
+  <view class="avatar-picker-sheet {{avatarPickerVisible ? 'show' : ''}}">
+    <view class="avatar-picker-header">
+      <text class="avatar-picker-title">选择头像</text>
+    </view>
+    <view class="avatar-picker-grid">
+      <view class="avatar-picker-item {{avatar === item ? 'selected' : ''}}"
+            wx:for="{{avatarList}}" wx:key="*this"
+            data-name="{{item}}" bindtap="selectAvatar">
+        <image class="avatar-picker-img" src="/assets/avatar/{{item}}" mode="aspectFill"></image>
+      </view>
+    </view>
+  </view>
+</view>

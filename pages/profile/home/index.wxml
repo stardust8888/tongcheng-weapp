@@ -1,0 +1,165 @@
+<view class="page-detail {{themeClass}}">
+  <!-- 顶部个人信息 -->
+  <view class="hero-header">
+    <view class="hero-bg"></view>
+    <view class="hero-more" wx:if="{{!isSelf}}" bindtap="showMoreMenu">
+      <text class="hero-more-icon">⚙</text>
+      <text class="hero-more-text">更多</text>
+    </view>
+    <view class="hero-content">
+      <image class="hero-avatar" src="{{avatar || '/assets/avatar/default.png'}}" mode="aspectFill"></image>
+      <text class="hero-nickname">{{nickname || '用户'}}</text>
+      <text class="hero-role" wx:if="{{role}}">{{role}}</text>
+    </view>
+    <view class="hero-actions" wx:if="{{!isSelf}}">
+      <view class="action-watch {{isWatched ? 'watched' : ''}}" bindtap="toggleWatch">
+        <text>{{isWatched ? '已关注' : '+ 关注'}}</text>
+      </view>
+      <view class="action-hello" bindtap="sayHello">
+        <text>打招呼</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 子女信息卡片 -->
+  <view class="child-card" wx:if="{{hasChild}}">
+    <!-- 照片轮播 -->
+    <view class="child-photo-hero">
+      <swiper class="child-swiper" indicator-dots="{{child.photos.length > 1}}" indicator-color="rgba(255,255,255,0.4)" indicator-active-color="#fff" autoplay circular>
+        <swiper-item wx:for="{{child.photos}}" wx:key="*this">
+          <image class="child-photo" src="{{item}}" mode="aspectFit" bindtap="previewChildPhoto" data-index="{{index}}"></image>
+        </swiper-item>
+      </swiper>
+      <view class="child-photo-overlay"></view>
+      <view class="child-photo-tags">
+        <view class="photo-tag-relation" wx:if="{{child.relation}}">{{child.relation}}</view>
+        <view class="photo-tag-summary" wx:if="{{child.summary}}">{{child.summary}}</view>
+      </view>
+    </view>
+
+    <!-- 核心信息 -->
+    <view class="child-detail">
+      <view class="detail-highlight">
+        <view class="highlight-item">
+          <text class="highlight-value {{child.marital === '未填写' ? 'placeholder' : ''}}">{{child.marital}}</text>
+          <text class="highlight-label">婚姻</text>
+        </view>
+        <view class="highlight-divider"></view>
+        <view class="highlight-item">
+          <text class="highlight-value {{child.income === '未填写' ? 'placeholder' : ''}}">{{child.income}}</text>
+          <text class="highlight-label">年薪</text>
+        </view>
+        <view class="highlight-divider"></view>
+        <view class="highlight-item">
+          <text class="highlight-value {{child.house === '未填写' ? 'placeholder' : ''}}">{{child.house}}</text>
+          <text class="highlight-label">房产</text>
+        </view>
+        <view class="highlight-divider"></view>
+        <view class="highlight-item">
+          <text class="highlight-value {{child.car === '未填写' ? 'placeholder' : ''}}">{{child.car}}</text>
+          <text class="highlight-label">车辆</text>
+        </view>
+      </view>
+
+      <view class="detail-rows">
+        <view class="detail-row">
+          <text class="detail-icon">🏢</text>
+          <text class="detail-label">单位</text>
+          <text class="detail-value {{child.company === '未填写' ? 'placeholder' : ''}}">{{child.company}}</text>
+        </view>
+        <view class="detail-row">
+          <text class="detail-icon">💼</text>
+          <text class="detail-label">工作</text>
+          <text class="detail-value {{child.work === '未填写' ? 'placeholder' : ''}}">{{child.work}}</text>
+        </view>
+        <view class="detail-row">
+          <text class="detail-icon">📍</text>
+          <text class="detail-label">地点</text>
+          <text class="detail-value {{child.location === '未填写' ? 'placeholder' : ''}}">{{child.location}}</text>
+        </view>
+        <view class="detail-row">
+          <text class="detail-icon">🎯</text>
+          <text class="detail-label">爱好</text>
+          <text class="detail-value {{child.interest === '未填写' ? 'placeholder' : ''}}">{{child.interest}}</text>
+        </view>
+      </view>
+
+      <view class="detail-desc" wx:if="{{child.description}}">
+        <text class="desc-text">{{child.description}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 动态列表 -->
+  <view class="moment-section">
+    <view class="section-title">
+      <text class="section-icon">📝</text>
+      <text class="section-label">TA的动态</text>
+      <text class="section-count" wx:if="{{momentList.length > 0}}">{{momentList.length}}条</text>
+    </view>
+
+    <view class="moment-list" wx:if="{{momentList.length > 0}}">
+      <view class="moment-card" wx:for="{{momentList}}" wx:key="id">
+        <text class="moment-meta">{{item.time}}</text>
+        <text class="moment-text">{{item.content}}</text>
+        <view class="moment-images" wx:if="{{item.images.length > 0}}">
+          <image
+            wx:for="{{item.images}}"
+            wx:for-item="img"
+            wx:key="*this"
+            class="moment-img {{item.images.length === 1 ? 'single' : ''}}"
+            src="{{img}}"
+            mode="{{item.images.length === 1 ? 'widthFix' : 'aspectFill'}}"
+            bindtap="previewImage"
+            data-current="{{img}}"
+            data-urls="{{item.images}}"
+          ></image>
+        </view>
+        <view class="moment-footer">
+          <view class="moment-actions">
+            <view class="moment-action" bindtap="likePost" data-id="{{item.id}}">
+              <text class="action-icon {{item.isLiked ? 'liked' : ''}}">{{item.isLiked ? '💖' : '❤️'}}</text>
+              <text class="action-count {{item.isLiked ? 'liked' : ''}}">{{item.likeCount}}</text>
+            </view>
+            <view class="moment-action" bindtap="openComment" data-id="{{item.id}}">
+              <view class="action-icon icon-comment"></view>
+              <text class="action-count">{{item.commentCount}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="comment-section" wx:if="{{item.comments.length > 0}}">
+          <view class="comment-item" wx:for="{{item.comments}}" wx:for-item="c" wx:key="id"
+                wx:if="{{index < 3 || item.showAllComments}}"
+                bindtap="replyComment"
+                data-momentid="{{item.id}}"
+                data-userid="{{c.userID}}"
+                data-username="{{c.username}}">
+            <text class="comment-user">{{c.username}}</text>
+            <text class="comment-reply" wx:if="{{c.replierName}}"> 回复 </text><text class="comment-replier" wx:if="{{c.replierName}}">{{c.replierName}}</text>
+            <text class="comment-text">：{{c.content}}</text>
+          </view>
+          <view class="comment-more" wx:if="{{item.comments.length > 3 && !item.showAllComments}}"
+                catchtap="showMoreComments" data-id="{{item.id}}">
+            <text class="comment-more-text">查看全部 {{item.comments.length}} 条评论</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty-moments" wx:if="{{!loading && momentList.length === 0}}">
+      <text class="empty-text">暂无动态</text>
+    </view>
+  </view>
+
+  <view class="comment-bar" wx:if="{{commentMomentID > 0}}">
+    <input class="comment-input"
+           value="{{commentInput}}"
+           placeholder="{{commentPlaceholder}}"
+           focus="{{inputFocus}}"
+           bindinput="onCommentInput"
+           bindblur="onCommentBlur"
+           confirm-type="send"
+           bindconfirm="sendComment" />
+    <view class="comment-send-btn" bindtap="sendComment">发送</view>
+  </view>
+</view>

@@ -1,0 +1,85 @@
+.page-blacklist {
+  background: var(--tb);
+  min-height: 100vh;
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+.black-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.black-card {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 32rpx 36rpx;
+  box-shadow: 0 4rpx 20rpx rgba(var(--ts), 0.06);
+}
+
+.black-avatar {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 2rpx solid var(--tb-l);
+}
+
+.black-name {
+  flex: 1;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.remove-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 88rpx;
+  padding: 0 32rpx;
+  background: #fff;
+  border: 2rpx solid #ddd;
+  border-radius: 44rpx;
+}
+
+.remove-text {
+  font-size: 32rpx;
+  color: #666;
+}
+
+.loading-wrap {
+  padding: 40rpx 0;
+  text-align: center;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #777;
+}
+
+.empty-wrap {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 160rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16rpx;
+  margin-top: 40rpx;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 16rpx;
+}
+
+.empty-text {
+  font-size: 34rpx;
+  color: #555;
+  font-weight: 500;
+}

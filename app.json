@@ -1,0 +1,55 @@
+{
+  "pages": [
+    "pages/discover/index",
+    "pages/profile/index",
+    "pages/moments/index",
+    "pages/messages/index",
+    "pages/login/index",
+    "pages/login/agreement",
+    "pages/profile/edit-child/index",
+    "pages/profile/edit-profile/index",
+    "pages/profile/watch-list/index",
+    "pages/messages/chat/index",
+    "pages/moments/post/index",
+    "pages/profile/my-moments/index",
+    "pages/profile/settings/index",
+    "pages/profile/interaction-list/index",
+    "pages/profile/black-list/index",
+    "pages/profile/feedback/index",
+    "pages/profile/home/index"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "爸妈来牵线",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F5F5F5",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#999999",
+    "selectedColor": "#F06B6B",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/discover/index",
+        "text": "发现"
+      },
+      {
+        "pagePath": "pages/moments/index",
+        "text": "动态"
+      },
+      {
+        "pagePath": "pages/messages/index",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

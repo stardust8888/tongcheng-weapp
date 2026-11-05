@@ -1,0 +1,133 @@
+.page-messages {
+  background: var(--tb);
+  box-sizing: border-box;
+}
+
+.chat-scroll {
+  height: calc(100vh - 180rpx);
+  padding: 24rpx 24rpx 40rpx;
+  box-sizing: border-box;
+}
+
+.chat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.chat-card {
+  display: flex;
+  align-items: center;
+  padding: 32rpx;
+  gap: 24rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(var(--ts), 0.06);
+  box-sizing: border-box;
+  width: 100%;
+  border-left: 6rpx solid var(--tp);
+}
+
+.chat-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.chat-avatar {
+  width: 104rpx;
+  height: 104rpx;
+  border-radius: 50%;
+  border: 4rpx solid var(--tb-l);
+}
+
+.chat-avatar-default {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--tp-ll), var(--tp));
+}
+
+.avatar-text {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #fff;
+}
+
+.unread-badge {
+  position: absolute;
+  top: -4rpx;
+  right: -4rpx;
+  min-width: 40rpx;
+  height: 40rpx;
+  padding: 0 10rpx;
+  background: #E74C3C;
+  border-radius: 20rpx;
+  border: 3rpx solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.unread-text {
+  font-size: 26rpx;
+  color: #fff;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.chat-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.chat-name {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: var(--tt);
+}
+
+.chat-msg {
+  font-size: 30rpx;
+  color: #555;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chat-time {
+  font-size: 26rpx;
+  color: #777;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 4rpx;
+}
+
+.empty-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 120rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: 16rpx;
+}
+
+.empty-text {
+  font-size: 34rpx;
+  color: #555;
+  font-weight: 500;
+}
+
+.empty-hint {
+  font-size: 28rpx;
+  color: #777;
+}

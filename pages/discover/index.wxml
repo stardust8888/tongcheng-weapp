@@ -1,0 +1,51 @@
+<view class="page-discover {{themeClass}}">
+  <view class="discover-list">
+    <view class="discover-card" wx:for="{{discoverList}}" wx:key="id">
+      <view class="card-body">
+        <view class="card-avatar-wrap">
+          <image class="card-avatar" src="{{item.photo}}" mode="aspectFill"></image>
+          <view class="card-match-tag" wx:if="{{item.relationLabel}}">{{item.relationLabel}}</view>
+        </view>
+        <view class="card-info">
+          <text class="card-summary" wx:if="{{item.summary}}">{{item.summary}}</text>
+          <view class="card-detail-list">
+            <view class="card-detail-row">
+              <text class="detail-label">年薪</text>
+              <text class="detail-value {{item.income === '未填写' ? 'placeholder' : ''}}">{{item.income}}</text>
+            </view>
+            <view class="card-detail-row">
+              <text class="detail-label">单位</text>
+              <text class="detail-value {{item.company === '未填写' ? 'placeholder' : ''}}">{{item.company}}</text>
+            </view>
+            <view class="card-detail-row">
+              <text class="detail-label">工作</text>
+              <text class="detail-value {{item.work === '未填写' ? 'placeholder' : ''}}">{{item.work}}</text>
+            </view>
+            <view class="card-detail-row">
+              <text class="detail-label">地点</text>
+              <text class="detail-value {{item.location === '未填写' ? 'placeholder' : ''}}">{{item.location}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="card-desc" wx:if="{{item.description}}">
+        <text class="desc-text">{{item.description}}</text>
+      </view>
+      <view class="card-actions">
+        <view class="btn-detail" catchtap="viewDetail" data-id="{{item.id}}">看资料</view>
+        <view class="btn-hello" catchtap="sayHello" data-id="{{item.id}}">找家长</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="list-footer" wx:if="{{discoverList.length > 0}}">
+    <text class="footer-text">{{noMore ? '没有更多了' : (loading ? '加载中...' : '')}}</text>
+  </view>
+
+  <view class="empty-card" wx:if="{{!loading && discoverList.length === 0}}">
+    <text class="empty-icon">💝</text>
+    <text class="empty-text">暂无发现</text>
+    <text class="empty-hint">完善资料后将为您推荐</text>
+  </view>
+
+</view>

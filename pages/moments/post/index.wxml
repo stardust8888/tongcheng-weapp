@@ -1,0 +1,26 @@
+<view class="page-post {{themeClass}}">
+  <view class="post-card">
+    <textarea class="post-input" placeholder="分享你的想法..." value="{{content}}" bindinput="onInput" maxlength="500" auto-height></textarea>
+
+    <view class="photo-grid">
+      <view class="photo-item" wx:for="{{photoList}}" wx:key="display">
+        <image class="photo-img" src="{{item.display}}" mode="aspectFill" bindtap="previewImage" data-src="{{item.display}}"></image>
+        <view class="photo-del" catchtap="removePhoto" data-index="{{index}}">×</view>
+        <view class="photo-loading" wx:if="{{item.uploading}}">
+          <text class="loading-text">上传中</text>
+        </view>
+      </view>
+      <view class="photo-add" bindtap="choosePhoto" wx:if="{{photoList.length < 9}}">
+        <text class="add-icon">+</text>
+        <text class="add-text">添加图片</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="post-footer">
+    <view class="post-count">{{content.length}}/500</view>
+    <view class="btn-submit {{posting ? 'disabled' : ''}}" bindtap="submitPost">
+      <text>{{posting ? '发布中...' : '发布动态'}}</text>
+    </view>
+  </view>
+</view>
